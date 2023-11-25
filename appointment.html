@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>Appointment</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: black;
+            text-align: center;
+        }
+
+        ul li {
+            padding: 5px;
+            background: #f4f4f4;
+            margin: 5px 0;
+        }
+
+        ul li span{
+            color: blue;
+        }
+        header {
+            background: #f4f4f4;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .container {
+            margin: auto;
+            width: 500px;
+            overflow: auto;
+            padding: 3rem 2rem;
+        }
+
+        #my-form {
+            padding: 2rem;
+            background: #f4f4f4;
+        }
+
+        #my-form label {
+            display: block;
+            width: 100%;
+        }
+
+        ul {
+            list-style: none;
+        }
+        label{
+            display: block;
+            width:100%
+        }
+        
+        .bg-brown{
+            background: brown;
+            color: black;
+        }
+        .bg-navy{
+            background: navy;
+            color: black;
+        }
+ 
+        .error{
+            background: orangered;
+            color: #fff;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        p {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 id="h"></h1>
+    </header>
+
+    <section class="container">
+        <form id="my-form">
+            <h1>Add new Appointment</h1>
+            <div class="msg"></div>
+            <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" value="">
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="text" id="email" value="">
+            </div>
+            <div>
+                <label for="number">Number</label>
+                <input type="number" id="number" value="">
+                
+                <input type="hidden" id="user-id" name="user-id" value="">
+
+            </div>
+  
+            <input type="submit" class="btn-dark" value="submit">
+        </form>
+        <ul id="users"></ul>
+        <ul id="items" class="list-group">
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>   
+        </ul>
+
+    </section>
+    <script type="text/javascript" src="/Users/sushantkumarsingh/Downloads/00-starting-setup-5/expense/appointment.js"></script>
+</body>
+</html>
