@@ -9,24 +9,27 @@ const User = require('./models/user');
 var cors = require('cors');
 const app = express();
 
+app.set('view engine', 'ejs'); // Set EJS as the view engine
+app.set('views','views');
 
-app.use(cors());
-const corsOptions = {
-    origin: 'https://localhost:3000', // replace with your allowed origin
+/*const corsOptions = {
+    origin: 'http://localhost:3000', // replace with your allowed origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204,
-  };
+  };*/
   
-  app.use(cors(corsOptions));
+  app.use(cors());
   
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.post('/user/add-user',async (req,res,next)=>{
+    console.log('Request Body:', req.body);
     try{
         if(!req.body.number){
             throw new Error('Phone number is mandatory!');
@@ -38,20 +41,31 @@ app.post('/user/add-user',async (req,res,next)=>{
     res.status(201).json({newUserDetail:data});
 }
 catch(err){
+    console.log(JSON.stringify(err));
     res.status(500).json({
-        error:err
-    })
-}});
-app.get('/user/get-users',async(req,res,next)=>{
-   const users = await User.findAll();
-   res.status(200).json({allUsers:users});
-
-});
-
+        error:err.message
+        })
+    
+    }});
+    app.get('/user/get-users', async (req, res, next) => {
+        try {
+          const users = await User.findAll();
+          res.status(200).json({ allUsers: users });
+        } catch (error) {
+          // Log the error to the console
+          console.error(error);
+      
+          // Send a generic error response to the client
+          res.status(500).json({ error: 'Internal Server Error' });
+        }
+      });
+      
 app.use(errorController.get404);
 
 sequelize.sync().then(result=>{
     //console.log(result);
-    app.listen(3000);
+    app.listen(3000, () => {
+        console.log('Server is running on port 3000');
+      });
 })
 .catch(err=>{console.log(err)});
